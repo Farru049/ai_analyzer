@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 from app.models.user import User
 from app.core.security import verify_password, create_access_token, hash_password
-from app.models.user import UserCreate
+from app.schemas.user import UserCreate
 
 def register_user(db:Session, user_data:UserCreate):
     existing_user = db.query(User).filter(User.email == user_data.email).first()
