@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, Query
 from sqlalchemy.orm import Session
 from typing import List
 from app.models.user import User
@@ -16,7 +16,7 @@ def create(request: Request,data:ApplicationCreate, db:Session = Depends(get_db)
 
 @router.get("/", response_model = List[ApplicationResponse])
 @limiter.limit("30/minute")
-def get_all(request:Request,db:Session = Depends(get_db), current_user:User = Depends(get_current_user)):
+def get_all(request:Request,skip:int = Query(0,ge=0, description="Numbers to skip"),limit:int = Query(10,ge=1, le=100,description="Number of records to return"),db:Session = Depends(get_db), current_user:User = Depends(get_current_user)):
     return get_applications(db, current_user.id)
 
 @router.get("/{application_id}",response_model = ApplicationResponse)

@@ -17,8 +17,8 @@ def create_application(db:Session, user_id:int, data:ApplicationCreate):
     db.refresh(application)
     return application
 
-def get_applications(db:Session, user_id:int):
-    return db.query(Application).filter(Application.user_id == user_id).all()
+def get_applications(db:Session, user_id:int, skip:int =0, limit:int = 10):
+    return db.query(Application).filter(Application.user_id == user_id).offset(skip).limit(limit).all()
 
 def get_application(db:Session, user_id:int, application_id:int):
     application = db.query(Application).filter(Application.user_id == user_id, Application.id == application_id).first()
