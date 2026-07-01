@@ -20,6 +20,7 @@ AI-powered backend application that helps users manage job applications and anal
 * Clean Layered Architecture (Routes, Services, Models, Schemas)
 * React Frontend Integration Planned
 * Replacing Llama 3.8B model with GPT OSS 20B
+*Adding Rate Limiting
 
 ## System Architecture
 
